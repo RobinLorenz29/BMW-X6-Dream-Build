@@ -41,17 +41,19 @@
   async function renderKeyCard() {
     document.getElementById("keyCardTitle").textContent = KEY_INFO.title;
     document.getElementById("keyCardDesc").textContent = KEY_INFO.description;
-    const media = document.getElementById("keyCardMedia");
+    document.getElementById("keyShowcaseLabel").textContent = KEY_INFO.title;
+
     const ok = await preload(KEY_INFO.image);
-    if (ok) {
+    if (!ok) return;
+
+    [document.getElementById("keyCardMedia"), document.getElementById("keyShowcaseMedia")].forEach((media) => {
       media.style.backgroundImage = `url(${imgUrl(KEY_INFO.image)})`;
       media.style.backgroundSize = "cover";
       media.style.backgroundPosition = "center";
       media.style.backgroundRepeat = "no-repeat";
       media.classList.add("has-image");
-      media.style.cursor = "zoom-in";
       media.addEventListener("click", () => openLightbox(imgUrl(KEY_INFO.image), KEY_INFO.title));
-    }
+    });
   }
 
   /* ---------------- main view backgrounds ---------------- */
@@ -166,12 +168,24 @@
     modalSpecs.innerHTML = (spot.specs || []).map((s) => `<li>${s}</li>`).join("");
 
     modalMedia.innerHTML = "";
-    modalMedia.classList.remove("no-image");
+    modalMedia.classList.remove("no-image", "modal-media-grid");
     const gallery = (spot.gallery && spot.gallery.length ? spot.gallery : [spot.image]).filter(Boolean);
     const results = await Promise.all(gallery.map(preload));
     const available = gallery.filter((_, i) => results[i]);
 
-    if (available.length) {
+    if (!available.length) {
+      modalMedia.classList.add("no-image");
+    } else if (spot.galleryLayout === "grid" && available.length > 1) {
+      // Show every image at once, side by side, instead of a single-image + thumbnail switcher.
+      modalMedia.classList.add("modal-media-grid");
+      available.forEach((file) => {
+        const img = document.createElement("img");
+        img.src = imgUrl(file);
+        img.alt = spot.title;
+        img.addEventListener("click", () => openLightbox(imgUrl(file), spot.title));
+        modalMedia.appendChild(img);
+      });
+    } else {
       renderModalImage(available[0], spot.title);
       if (available.length > 1) {
         const strip = document.createElement("div");
@@ -189,8 +203,6 @@
         });
         modalMedia.appendChild(strip);
       }
-    } else {
-      modalMedia.classList.add("no-image");
     }
 
     modalOverlay.classList.add("open");
@@ -233,14 +245,25 @@
   function openLightbox(src, alt) {
     lightboxImg.src = src;
     lightboxImg.alt = alt || "";
+    lightboxImg.classList.remove("zoomed");
     lightboxOverlay.classList.add("open");
   }
   function closeLightbox() {
     lightboxOverlay.classList.remove("open");
+    lightboxImg.classList.remove("zoomed");
   }
   document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
   lightboxOverlay.addEventListener("click", (e) => {
     if (e.target === lightboxOverlay) closeLightbox();
+  });
+  // Click the image itself to toggle between fit-to-screen and full native size (scrollable).
+  lightboxImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    lightboxImg.classList.toggle("zoomed");
+  });
+
+  document.getElementById("posterBtn").addEventListener("click", () => {
+    openLightbox("assets/source/poster.jpg", "Original Dream Build Poster");
   });
 
   document.addEventListener("keydown", (e) => {

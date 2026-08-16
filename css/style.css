@@ -136,6 +136,8 @@ img { max-width: 100%; display: block; }
 }
 .btn-primary { background: var(--gold); color: #14120b; font-weight: 500; }
 .btn-primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--text); flex-shrink: 0; }
+.btn-outline:hover { background: rgba(201,161,90,0.12); border-color: var(--gold-bright); color: var(--gold-bright); }
 
 .scroll-hint {
   position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
@@ -178,6 +180,27 @@ img { max-width: 100%; display: block; }
 }
 .stage-frame-wide { aspect-ratio: 16/8.6; }
 .stage-hint { margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.14em; color: var(--text-faint); text-transform: uppercase; }
+
+/* Interior view + standalone Display Key showcase, shown side by side */
+.interior-row { display: flex; gap: 1.5rem; align-items: flex-start; justify-content: center; width: 100%; }
+.interior-row .stage-frame { flex: 1 1 auto; max-width: 960px; }
+.key-showcase {
+  flex: 0 0 220px; background: var(--panel); border: 1px solid var(--panel-border);
+  border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.7);
+}
+.key-showcase-media {
+  width: 100%; aspect-ratio: 3/4; background-color: #0e1013; background-size: cover; background-position: center;
+  background-image:
+    linear-gradient(rgba(201,161,90,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,161,90,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.key-showcase-media.has-image { background-image: none; cursor: zoom-in; }
+.key-showcase-label {
+  margin: 0; padding: 0.85rem; text-align: center; border-top: 1px solid var(--panel-border);
+  font-family: 'Oswald', sans-serif; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-dim);
+}
 
 .view-panel {
   position: absolute; inset: 0; opacity: 0; pointer-events: none;
@@ -276,6 +299,15 @@ img { max-width: 100%; display: block; }
   content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 1px; background: var(--gold);
 }
 
+/* ---------------- POSTER CTA ---------------- */
+.poster-cta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;
+  max-width: 1040px; margin: 0 auto; background: var(--glass); border: 1px solid var(--panel-border);
+  border-radius: var(--radius); padding: 2.2rem 2.4rem; backdrop-filter: blur(10px);
+}
+.poster-cta-text h2 { font-size: 1.5rem; margin: 0.3rem 0 0.5rem; }
+.poster-cta-text .section-desc { margin: 0; text-align: left; }
+
 /* ---------------- FOOTER ---------------- */
 .site-footer {
   border-top: 1px solid var(--panel-border); padding: 2.6rem 2.4rem;
@@ -317,6 +349,14 @@ img { max-width: 100%; display: block; }
   cursor: zoom-in;
 }
 .modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.modal-media.modal-media-grid {
+  aspect-ratio: unset; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; cursor: default;
+}
+.modal-media.modal-media-grid img { width: 100%; height: 240px; object-fit: cover; cursor: zoom-in; }
+@media (max-width: 560px) {
+  .modal-media.modal-media-grid { grid-template-columns: 1fr; }
+  .modal-media.modal-media-grid img { height: 180px; }
+}
 .modal-media.no-image {
   display: flex; align-items: center; justify-content: center; cursor: default;
   background-image:
@@ -358,9 +398,11 @@ img { max-width: 100%; display: block; }
   position: fixed; inset: 0; z-index: 300; background: rgba(2,2,3,0.94);
   display: flex; align-items: center; justify-content: center; padding: 2rem;
   opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease);
+  overflow: auto;
 }
 .lightbox-overlay.open { opacity: 1; pointer-events: auto; }
-.lightbox-overlay img { max-width: 100%; max-height: 90vh; border-radius: 4px; }
+.lightbox-overlay img { max-width: 100%; max-height: 90vh; border-radius: 4px; cursor: zoom-in; margin: auto; }
+.lightbox-overlay img.zoomed { max-width: none; max-height: none; cursor: zoom-out; border-radius: 0; }
 .lightbox-close {
   position: absolute; top: 1.6rem; right: 1.8rem; background: none; border: none;
   color: var(--text); font-size: 2rem; cursor: pointer; line-height: 1;
@@ -383,6 +425,8 @@ img { max-width: 100%; display: block; }
   .nav-toggle { display: flex; z-index: 101; }
   .spec-list { grid-template-columns: 1fr; }
   .build-grid { grid-template-columns: 1fr; }
+  .interior-row { flex-direction: column; align-items: center; }
+  .key-showcase { flex: 0 0 auto; width: 100%; max-width: 260px; }
   .section { padding: 5rem 1.3rem 4rem; }
   .modal-body { padding: 1.5rem 1.4rem 1.8rem; }
 }

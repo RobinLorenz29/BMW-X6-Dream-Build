@@ -83,9 +83,16 @@
   </div>
 
   <div class="stage reveal">
-    <div class="stage-frame stage-frame-wide" id="interiorStage">
-      <div class="view-panel active" data-section="interior" data-role="view-panel">
-        <div class="view-label">INTERIOR</div>
+    <div class="interior-row">
+      <div class="stage-frame stage-frame-wide" id="interiorStage">
+        <div class="view-panel active" data-section="interior" data-role="view-panel">
+          <div class="view-label">INTERIOR</div>
+        </div>
+      </div>
+
+      <div class="key-showcase" id="keyShowcase">
+        <div class="key-showcase-media" id="keyShowcaseMedia"></div>
+        <p class="key-showcase-label" id="keyShowcaseLabel"></p>
       </div>
     </div>
     <p class="stage-hint">Punkte anklicken für Details</p>
@@ -117,6 +124,18 @@
         <p class="modal-desc" id="keyCardDesc"></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ ORIGINAL POSTER ============ -->
+<section class="section poster-section" id="poster">
+  <div class="poster-cta reveal">
+    <div class="poster-cta-text">
+      <p class="eyebrow">04 — Referenz</p>
+      <h2>Original Dream Build Poster</h2>
+      <p class="section-desc">Das vollständige Ausgangsposter mit allen geplanten Umbauten in der Übersicht.</p>
+    </div>
+    <button class="btn btn-outline" id="posterBtn">Poster ansehen</button>
   </div>
 </section>
 

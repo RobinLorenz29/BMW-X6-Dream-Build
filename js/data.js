@@ -26,6 +26,7 @@ const SPECS = [
   "PDC Vorn / Hinten",
   "360° Kamera",
   "Rückfahrkamera",
+  "Schiebedach",
   "Sternenhimmel",
 ];
 
@@ -40,21 +41,22 @@ const HOTSPOTS = [
   {
     id: "wrap",
     section: "front",
-    x: 38,
-    y: 40,
+    x: 50,
+    y: 30,
     title: "FOLIERUNG",
-    subtitle: "Farbe: Blau",
+    subtitle: "Blaue Folierung",
     description:
       "Vollfolierung der Karosserie in Blau, gilt für das gesamte Fahrzeug (Front bis Heck). Referenz zeigt den Zielfarbton.",
     image: "ref-wrap-blue.jpg",
     gallery: ["ref-wrap-blue.jpg", "ref-wrap-blue-alt.jpg"],
+    galleryLayout: "grid",
     specs: ["Farbe: Blau", "Umfang: Vollfolierung"],
   },
   {
     id: "headlights",
     section: "front",
-    x: 27,
-    y: 46,
+    x: 45,
+    y: 47,
     title: "HEADLIGHTS",
     subtitle: "Geplante Scheinwerfer",
     description:
@@ -64,8 +66,8 @@ const HOTSPOTS = [
   {
     id: "acc-sensor",
     section: "front",
-    x: 18,
-    y: 53,
+    x: 31,
+    y: 48,
     title: "ABSTANDSTEMPOMAT (ACC)",
     subtitle: "ACC Sensor",
     description:
@@ -75,8 +77,8 @@ const HOTSPOTS = [
   {
     id: "front-lip",
     section: "front",
-    x: 20,
-    y: 80,
+    x: 33,
+    y: 79,
     title: "FRONT LIP",
     subtitle: "Geplante Front Lip",
     description:
@@ -88,8 +90,8 @@ const HOTSPOTS = [
   {
     id: "taillights",
     section: "rear",
-    x: 55,
-    y: 42,
+    x: 36,
+    y: 47,
     title: "TAILLIGHTS",
     subtitle: "Geplante Rückleuchten",
     description:
@@ -99,8 +101,8 @@ const HOTSPOTS = [
   {
     id: "rear-lip",
     section: "rear",
-    x: 45,
-    y: 88,
+    x: 20,
+    y: 64,
     title: "REAR LIP",
     subtitle: "Geplante Rear Lip",
     description:
@@ -113,7 +115,7 @@ const HOTSPOTS = [
     id: "seats",
     section: "interior",
     x: 22,
-    y: 83,
+    y: 87,
     title: "BRAUNES LEDER INTERIOR",
     subtitle: "Sitzheizung · Sitzbelüftung · Massagesitze · Memory Funktion",
     description:
@@ -124,8 +126,8 @@ const HOTSPOTS = [
   {
     id: "steering-wheel",
     section: "interior",
-    x: 27,
-    y: 33,
+    x: 39,
+    y: 63,
     title: "LENKRAD",
     subtitle: "Braunes Leder / passend zum Interior",
     description:
@@ -135,8 +137,8 @@ const HOTSPOTS = [
   {
     id: "digital-cluster",
     section: "interior",
-    x: 18,
-    y: 26,
+    x: 45,
+    y: 53,
     title: "DIGITAL CLUSTER",
     subtitle: "",
     description: "Digitales Kombiinstrument (Digital Cluster) hinter dem Lenkrad.",
@@ -145,8 +147,8 @@ const HOTSPOTS = [
   {
     id: "dual-multimedia",
     section: "interior",
-    x: 52,
-    y: 25,
+    x: 58,
+    y: 53,
     title: "DUAL MULTIMEDIA DISPLAY",
     subtitle: "",
     description: "Dual Multimedia Display im Cockpit, zwei nebeneinander verbaute Breitbild-Screens.",
@@ -155,8 +157,8 @@ const HOTSPOTS = [
   {
     id: "digital-ac-panel",
     section: "interior",
-    x: 52,
-    y: 48,
+    x: 58,
+    y: 63,
     title: "DIGITAL AC PANEL",
     subtitle: "",
     description: "Digitales Klimabedienteil (Digital AC Panel) mit Sitzheizung/-belüftung-Steuerung.",
@@ -165,8 +167,8 @@ const HOTSPOTS = [
   {
     id: "head-up-display",
     section: "interior",
-    x: 26,
-    y: 13,
+    x: 37,
+    y: 38,
     title: "HEAD-UP DISPLAY",
     subtitle: "",
     description: "Head-Up Display, Einblendung relevanter Fahrdaten in der Windschutzscheibe.",
@@ -175,8 +177,8 @@ const HOTSPOTS = [
   {
     id: "starlight-headliner",
     section: "interior",
-    x: 64,
-    y: 6,
+    x: 65,
+    y: 8,
     title: "STERNENHIMMEL",
     subtitle: "",
     description: "Starlight Headliner / Sternenhimmel im Dachhimmel, per Faseroptik beleuchtet.",
