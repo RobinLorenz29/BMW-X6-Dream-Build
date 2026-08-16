@@ -20,6 +20,17 @@
     });
   }
 
+  /** Preloads an image and resolves its natural dimensions, or null if it fails to load. */
+  function preloadDimensions(filename) {
+    return new Promise((resolve) => {
+      if (!filename) return resolve(null);
+      const img = new Image();
+      img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+      img.onerror = () => resolve(null);
+      img.src = imgUrl(filename);
+    });
+  }
+
   /* ---------------- populate spec list ---------------- */
 
   function renderSpecs() {
@@ -27,7 +38,37 @@
     list.innerHTML = SPECS.map((spec) => `<li>${spec}</li>`).join("");
   }
 
+  async function renderKeyCard() {
+    document.getElementById("keyCardTitle").textContent = KEY_INFO.title;
+    document.getElementById("keyCardDesc").textContent = KEY_INFO.description;
+    const media = document.getElementById("keyCardMedia");
+    const ok = await preload(KEY_INFO.image);
+    if (ok) {
+      media.style.backgroundImage = `url(${imgUrl(KEY_INFO.image)})`;
+      media.style.backgroundSize = "cover";
+      media.style.backgroundPosition = "center";
+      media.style.backgroundRepeat = "no-repeat";
+      media.classList.add("has-image");
+      media.style.cursor = "zoom-in";
+      media.addEventListener("click", () => openLightbox(imgUrl(KEY_INFO.image), KEY_INFO.title));
+    }
+  }
+
   /* ---------------- main view backgrounds ---------------- */
+
+  // Natural pixel dimensions of each loaded view image, keyed by section.
+  // Hotspot x/y percentages are authored against these exact images, so the
+  // stage that hosts a view is resized to match its aspect ratio — this way
+  // "background-size: cover" never crops the image and a hotspot's percent
+  // position always lands on the same physical point in the photo.
+  const viewDimensions = {};
+
+  function applyStageAspect(stageEl, section) {
+    const dims = viewDimensions[section];
+    if (dims) {
+      stageEl.style.aspectRatio = `${dims.w} / ${dims.h}`;
+    }
+  }
 
   async function loadMainViews() {
     const map = {
@@ -39,12 +80,21 @@
     for (const panel of panels) {
       const section = panel.getAttribute("data-section");
       const file = map[section];
-      const ok = await preload(file);
-      if (ok) {
+      const dims = await preloadDimensions(file);
+      if (dims) {
+        viewDimensions[section] = dims;
         panel.style.backgroundImage = `url(${imgUrl(file)})`;
+        panel.style.backgroundSize = "cover";
+        panel.style.backgroundPosition = "center";
+        panel.style.backgroundRepeat = "no-repeat";
         panel.classList.add("has-image");
       }
     }
+
+    const exteriorStage = document.getElementById("exteriorStage");
+    const activeExteriorView = exteriorStage.querySelector(".view-panel.active");
+    applyStageAspect(exteriorStage, activeExteriorView.getAttribute("data-section"));
+    applyStageAspect(document.getElementById("interiorStage"), "interior");
 
     // Hero background reuses the front view once available, else stays a styled placeholder.
     const heroOk = await preload(map.front);
@@ -92,6 +142,7 @@
         stage.querySelectorAll("[data-role='view-panel']").forEach((panel) => {
           panel.classList.toggle("active", panel.getAttribute("data-section") === view);
         });
+        applyStageAspect(stage, view);
       });
     });
   }
@@ -116,19 +167,45 @@
 
     modalMedia.innerHTML = "";
     modalMedia.classList.remove("no-image");
-    const ok = await preload(spot.image);
-    if (ok) {
-      const img = document.createElement("img");
-      img.src = imgUrl(spot.image);
-      img.alt = spot.title;
-      img.addEventListener("click", () => openLightbox(imgUrl(spot.image), spot.title));
-      modalMedia.appendChild(img);
+    const gallery = (spot.gallery && spot.gallery.length ? spot.gallery : [spot.image]).filter(Boolean);
+    const results = await Promise.all(gallery.map(preload));
+    const available = gallery.filter((_, i) => results[i]);
+
+    if (available.length) {
+      renderModalImage(available[0], spot.title);
+      if (available.length > 1) {
+        const strip = document.createElement("div");
+        strip.className = "modal-gallery";
+        available.forEach((file, i) => {
+          const thumb = document.createElement("button");
+          thumb.className = "modal-gallery-thumb" + (i === 0 ? " active" : "");
+          thumb.style.backgroundImage = `url(${imgUrl(file)})`;
+          thumb.addEventListener("click", () => {
+            renderModalImage(file, spot.title);
+            strip.querySelectorAll(".modal-gallery-thumb").forEach((t) => t.classList.remove("active"));
+            thumb.classList.add("active");
+          });
+          strip.appendChild(thumb);
+        });
+        modalMedia.appendChild(strip);
+      }
     } else {
       modalMedia.classList.add("no-image");
     }
 
     modalOverlay.classList.add("open");
     document.body.style.overflow = "hidden";
+  }
+
+  function renderModalImage(file, alt) {
+    let img = modalMedia.querySelector("img");
+    if (!img) {
+      img = document.createElement("img");
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+      modalMedia.insertBefore(img, modalMedia.firstChild);
+    }
+    img.src = imgUrl(file);
+    img.alt = alt;
   }
 
   function closeModal() {
@@ -204,6 +281,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     renderSpecs();
+    renderKeyCard();
     renderHotspots();
     initViewSwitch();
     initReveal();

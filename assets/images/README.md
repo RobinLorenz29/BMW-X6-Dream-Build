@@ -1,46 +1,47 @@
-# Benötigte Bilddateien
+# Bilddateien
 
-Lege die Dateien mit **genau diesem Dateinamen** in diesen Ordner (`assets/images/`).
-Sobald eine Datei hier liegt, erscheint sie automatisch auf der Seite — es muss kein Code geändert werden.
+Alle Bilder für die interaktive Präsentation sind vorhanden.
 
-## Hauptansichten (groß, hochauflösend)
+## Hauptansichten (Hero / Stage-Hintergrund)
 
-| Datei | Verwendung | Empfehlung |
-|---|---|---|
-| `exterior-front.jpg` | Große Frontansicht des X6, Startseite + Hero-Hintergrund | möglichst breit/hochauflösend, Fahrzeug mittig |
-| `exterior-rear.jpg` | Große Heckansicht des X6 | möglichst breit/hochauflösend, Fahrzeug mittig |
-| `interior-main.jpg` | Großes Cockpit-/Innenraumfoto (Basis für alle Interior-Hotspots) | Weitwinkel, wie im Poster |
+| Datei | Herkunft |
+|---|---|
+| `exterior-front.jpg` | Zugeschnitten aus dem Original-Poster (`assets/source/poster.jpg`) |
+| `exterior-rear.jpg` | Zugeschnitten aus dem Original-Poster |
+| `interior-main.jpg` | Zugeschnitten aus dem Original-Poster |
 
-## Referenzbilder für die Hotspots
+Diese drei Bilder zeigen die Front-, Heck- und Interior-Renderings aus deinem Dream-Build-Poster —
+sie sind die einzige verfügbare Darstellung, wie das fertige Fahrzeug (Basis-E71 + geplante Teile)
+aussehen soll. Auflösung ist entsprechend begrenzt (die Renderings im Poster sind relativ klein),
+für die Web-Darstellung aber ausreichend scharf.
 
-| Datei | Hotspot | Vorhanden im Poster als Thumbnail? |
-|---|---|---|
-| `ref-wrap-blue.jpg` | Folierung (Farbe: Blau) | nein — Farbmuster/Folienreferenz fehlt separat |
-| `ref-headlights.jpg` | Headlights | ja |
-| `ref-acc-sensor.jpg` | ACC Sensor | ja |
-| `ref-front-lip.jpg` | Front Lip | ja |
-| `ref-taillights.jpg` | Taillights | ja |
-| `ref-rear-lip.jpg` | Rear Lip | ja |
-| `ref-seats.jpg` | Sitze (braunes Leder) | nein — nur im großen Interior-Foto sichtbar |
-| `ref-steering-wheel.jpg` | Lenkrad | nein — nur im großen Interior-Foto sichtbar |
-| `ref-digital-cluster.jpg` | Digital Cluster | ja |
-| `ref-dual-multimedia.jpg` | Dual Multimedia Display | nein — nur als Label im großen Interior-Foto |
-| `ref-digital-ac-panel.jpg` | Digital AC Panel | ja |
-| `ref-head-up-display.jpg` | Head-Up Display | nein — nur als Label im großen Interior-Foto |
-| `ref-starlight-headliner.jpg` | Sternenhimmel | nein — nur als Label im großen Interior-Foto |
-| `ref-key.jpg` | Display Key (aktuell nicht als eigener Hotspot verlinkt, siehe Hinweis unten) | ja |
+## Referenzbilder pro Hotspot
 
-**Hinweis Display Key:** Im Poster ist der Display Key kein Fahrzeug-Hotspot, sondern ein separates Info-Element.
-Sag Bescheid, ob er als zusätzlicher Hotspot (z. B. neben dem Fahrzeug) oder als eigene Karte in der "My Build"-Sektion erscheinen soll.
+| Datei | Bauteil |
+|---|---|
+| `ref-wrap-blue.jpg` / `ref-wrap-blue-alt.jpg` | Folierung — Farbreferenz Blau (2 Bilder, als Galerie im Modal) |
+| `ref-headlights.jpg` | Headlights |
+| `ref-taillights.jpg` | Taillights |
+| `ref-front-lip.jpg` | Front Lip |
+| `ref-rear-lip.jpg` | Rear Lip |
+| `ref-acc-sensor.jpg` | ACC Sensor |
+| `ref-seats.jpg` | Sitze / Braunes Leder Interior |
+| `ref-steering-wheel.jpg` | Lenkrad |
+| `ref-digital-cluster.jpg` | Digital Cluster |
+| `ref-dual-multimedia.jpg` | Dual Multimedia Display |
+| `ref-digital-ac-panel.jpg` | Digital AC Panel |
+| `ref-head-up-display.jpg` | Head-Up Display |
+| `ref-starlight-headliner.jpg` | Sternenhimmel |
+| `ref-key.jpg` | Display Key (eigene Karte im "My Build"-Bereich, kein Fahrzeug-Hotspot) |
 
-## Format-Empfehlung
+## Neue/andere Bilder ergänzen
 
-- JPG oder PNG, idealerweise ≥ 1600px auf der langen Seite für die drei Hauptansichten
-- Referenzbilder ≥ 800px auf der langen Seite reicht
-- Freigestellte PNGs (transparenter Hintergrund) sind für die Referenzbilder optional möglich, aber nicht erforderlich
+Dateiname beibehalten und einfach überschreiben — die Seite lädt sie automatisch, kein Code muss
+angepasst werden. Fehlt eine Datei, zeigt die Seite automatisch einen dezenten Platzhalter.
 
-## Fallback-Verhalten
+## Hotspot-Positionen
 
-Fehlt eine Datei, zeigt die Seite automatisch einen dezenten Platzhalter
-("Referenzbild folgt" bzw. ein stilisiertes Blueprint-Raster) statt eines kaputten Bildes an.
-Die Seite ist dadurch schon jetzt voll funktionsfähig, auch ohne Bilder.
+Liegen zentral in `js/data.js` (Felder `x`/`y`, in Prozent). Sie sind exakt auf die aktuellen
+Bilddateien `exterior-front.jpg`, `exterior-rear.jpg` und `interior-main.jpg` abgestimmt — wird eines
+dieser drei Bilder durch ein anders zugeschnittenes/perspektiviertes Foto ersetzt, müssen die
+Positionen in `data.js` entsprechend nachjustiert werden.
