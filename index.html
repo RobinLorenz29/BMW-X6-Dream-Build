@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BMW X6 E71 — Dream Build</title>
+<meta name="description" content="Interaktive digitale Präsentation des BMW X6 E71 Dream Build Projekts." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ============ NAV ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-name">BMW X6</span>
+      <span class="brand-tag">E71 · DREAM BUILD</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="#exterior" class="nav-link">Exterior</a>
+      <a href="#interior" class="nav-link">Interior</a>
+      <a href="#build" class="nav-link">My Build</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" data-role="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content reveal">
+    <p class="eyebrow">Interaktive Fahrzeugpräsentation</p>
+    <h1>BMW X6 <span class="thin">E71</span></h1>
+    <p class="hero-sub">Dream Build Projekt — Umbauplanung im Detail erkunden</p>
+    <a href="#exterior" class="btn btn-primary">Build erkunden</a>
+  </div>
+  <div class="scroll-hint">
+    <span></span>
+    <p>Scrollen</p>
+  </div>
+</section>
+
+<!-- ============ EXTERIOR ============ -->
+<section class="section" id="exterior">
+  <div class="section-head reveal">
+    <p class="eyebrow">01 — Exterior</p>
+    <h2>Außenansicht</h2>
+    <p class="section-desc">Front und Heck im Detail. Klicke auf die markierten Punkte, um geplante Bauteile zu sehen.</p>
+  </div>
+
+  <div class="view-switch reveal">
+    <button class="view-btn active" data-view="front">Front View</button>
+    <button class="view-btn" data-view="rear">Rear View</button>
+  </div>
+
+  <div class="stage reveal">
+    <div class="stage-frame" id="exteriorStage">
+      <div class="view-panel active" data-section="front" data-role="view-panel">
+        <div class="view-label">FRONT VIEW</div>
+      </div>
+      <div class="view-panel" data-section="rear" data-role="view-panel">
+        <div class="view-label">REAR VIEW</div>
+      </div>
+    </div>
+    <p class="stage-hint">Punkte anklicken für Details</p>
+  </div>
+</section>
+
+<!-- ============ INTERIOR ============ -->
+<section class="section section-alt" id="interior">
+  <div class="section-head reveal">
+    <p class="eyebrow">02 — Interior</p>
+    <h2>Innenraum</h2>
+    <p class="section-desc">Cockpit, Sitze und Technik im Detail. Klicke auf die markierten Punkte, um mehr zu erfahren.</p>
+  </div>
+
+  <div class="stage reveal">
+    <div class="stage-frame stage-frame-wide" id="interiorStage">
+      <div class="view-panel active" data-section="interior" data-role="view-panel">
+        <div class="view-label">INTERIOR</div>
+      </div>
+    </div>
+    <p class="stage-hint">Punkte anklicken für Details</p>
+  </div>
+</section>
+
+<!-- ============ MY BUILD ============ -->
+<section class="section" id="build">
+  <div class="section-head reveal">
+    <p class="eyebrow">03 — Specification</p>
+    <h2>My Build</h2>
+    <p class="section-desc">Alle geplanten und verbauten Komponenten auf einen Blick.</p>
+  </div>
+
+  <div class="build-panel reveal">
+    <div class="build-panel-head">
+      <span class="build-dot"></span>
+      <h3>BMW X6 30d — Stage 1 (308 PS)</h3>
+    </div>
+    <ul class="spec-list" id="specList"></ul>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <span class="brand-name small">BMW X6</span>
+      <span class="brand-tag">E71 · DREAM BUILD</span>
+    </div>
+    <p>Digitale Umbau-Präsentation · erstellt zur Abstimmung mit der Werkstatt</p>
+  </div>
+</footer>
+
+<!-- ============ HOTSPOT MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Schließen">&times;</button>
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-body">
+      <p class="modal-eyebrow" id="modalEyebrow"></p>
+      <h3 id="modalTitle"></h3>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <ul class="modal-specs" id="modalSpecs"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Schließen">&times;</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
