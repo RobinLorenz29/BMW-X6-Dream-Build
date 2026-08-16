@@ -41,19 +41,17 @@
   async function renderKeyCard() {
     document.getElementById("keyCardTitle").textContent = KEY_INFO.title;
     document.getElementById("keyCardDesc").textContent = KEY_INFO.description;
-    document.getElementById("keyShowcaseLabel").textContent = KEY_INFO.title;
 
     const ok = await preload(KEY_INFO.image);
     if (!ok) return;
 
-    [document.getElementById("keyCardMedia"), document.getElementById("keyShowcaseMedia")].forEach((media) => {
-      media.style.backgroundImage = `url(${imgUrl(KEY_INFO.image)})`;
-      media.style.backgroundSize = "cover";
-      media.style.backgroundPosition = "center";
-      media.style.backgroundRepeat = "no-repeat";
-      media.classList.add("has-image");
-      media.addEventListener("click", () => openLightbox(imgUrl(KEY_INFO.image), KEY_INFO.title));
-    });
+    const media = document.getElementById("keyCardMedia");
+    media.style.backgroundImage = `url(${imgUrl(KEY_INFO.image)})`;
+    media.style.backgroundPosition = "center";
+    media.style.backgroundRepeat = "no-repeat";
+    media.classList.add("has-image");
+    media.style.cursor = "zoom-in";
+    media.addEventListener("click", () => openLightbox(imgUrl(KEY_INFO.image), KEY_INFO.title));
   }
 
   /* ---------------- main view backgrounds ---------------- */

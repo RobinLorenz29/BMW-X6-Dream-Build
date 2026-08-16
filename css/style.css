@@ -181,27 +181,6 @@ img { max-width: 100%; display: block; }
 .stage-frame-wide { aspect-ratio: 16/8.6; }
 .stage-hint { margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.14em; color: var(--text-faint); text-transform: uppercase; }
 
-/* Interior view + standalone Display Key showcase, shown side by side */
-.interior-row { display: flex; gap: 1.5rem; align-items: flex-start; justify-content: center; width: 100%; }
-.interior-row .stage-frame { flex: 1 1 auto; max-width: 960px; }
-.key-showcase {
-  flex: 0 0 220px; background: var(--panel); border: 1px solid var(--panel-border);
-  border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.7);
-}
-.key-showcase-media {
-  width: 100%; aspect-ratio: 3/4; background-color: #0e1013; background-size: cover; background-position: center;
-  background-image:
-    linear-gradient(rgba(201,161,90,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,161,90,0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-.key-showcase-media.has-image { background-image: none; cursor: zoom-in; }
-.key-showcase-label {
-  margin: 0; padding: 0.85rem; text-align: center; border-top: 1px solid var(--panel-border);
-  font-family: 'Oswald', sans-serif; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--text-dim);
-}
-
 .view-panel {
   position: absolute; inset: 0; opacity: 0; pointer-events: none;
   transition: opacity 0.5s var(--ease);
@@ -275,13 +254,15 @@ img { max-width: 100%; display: block; }
   overflow: hidden; display: flex; flex-direction: column;
 }
 .key-card-media {
-  width: 100%; aspect-ratio: 4/3; background-color: #0e1013; background-size: cover; background-position: center;
+  width: 100%; aspect-ratio: 3/4; background-color: #0e1013; background-position: center; background-repeat: no-repeat;
+  padding: 14px; box-sizing: border-box;
   background-image:
     linear-gradient(rgba(201,161,90,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201,161,90,0.05) 1px, transparent 1px);
   background-size: 28px 28px;
   display: flex; align-items: center; justify-content: center;
 }
+.key-card-media.has-image { background-size: contain; }
 .key-card-media.has-image { background-image: none; }
 .key-card-body { padding: 1.6rem 1.8rem 2rem; }
 .key-card-body h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
@@ -425,8 +406,6 @@ img { max-width: 100%; display: block; }
   .nav-toggle { display: flex; z-index: 101; }
   .spec-list { grid-template-columns: 1fr; }
   .build-grid { grid-template-columns: 1fr; }
-  .interior-row { flex-direction: column; align-items: center; }
-  .key-showcase { flex: 0 0 auto; width: 100%; max-width: 260px; }
   .section { padding: 5rem 1.3rem 4rem; }
   .modal-body { padding: 1.5rem 1.4rem 1.8rem; }
 }
