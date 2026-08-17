@@ -17,6 +17,7 @@ const SPECS = [
   "Stage 1 (308 PS)",
   "Sitzheizung",
   "Sitzbelüftung",
+  "Lenkradheizung",
   "Massagesitze",
   "Memory Funktion",
   "Braunes Leder Interior",
